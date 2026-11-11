@@ -3,6 +3,7 @@ package arreglos.tienda.interfaz;
 import arreglos.tienda.modelo.*;
 import utilitario.Validacion;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 public class MainTienda {
@@ -66,6 +67,11 @@ public class MainTienda {
         double precio = Double.parseDouble(sc.nextLine());
         System.out.print("Ingrese el stock inicial: ");
         int licenciasDisponibles = Integer.parseInt(sc.nextLine());
+        if (tienda.agregarJuego(new Juego(nombre,categoria,tamanio,precio,licenciasDisponibles))){
+            JOptionPane.showMessageDialog(null, "El juego se ha agregado correctamente");
+        }else{
+            JOptionPane.showMessageDialog(null, "El juego no pudo ser agregado");
+        }
     }
     /*  public static void mostrarJuegos(){
 
