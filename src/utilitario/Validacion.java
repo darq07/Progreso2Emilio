@@ -1,4 +1,4 @@
-package arreglos.tienda.interfaz;
+package utilitario;
 
 import java.util.Scanner;
 
@@ -14,4 +14,3 @@ public class Validacion {
         return nombre;
     }
     }
-}
