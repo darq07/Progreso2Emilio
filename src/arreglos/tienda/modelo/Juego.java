@@ -5,16 +5,16 @@ public class Juego {
     private String categoria;
     private int tamanio;
     private double precio;
-    private int licenciasDisponibles;
+    private int licenciasDisponibles = -1;
     private int licenciasVendidas;
 
     public Juego(String nombre, String categoria, int tamanio, double precio, int licenciasDisponibles) {
-        this.nombre = nombre;
-        this.categoria = categoria;
-        this.tamanio = tamanio;
-        this.precio = precio;
-        this.licenciasDisponibles = licenciasDisponibles;
-        licenciasVendidas = 0;
+        setNombre(nombre);
+        setCategoria(categoria);
+        setTamanio(tamanio);
+        setPrecio(precio);
+        setLicenciasDisponibles(licenciasDisponibles);
+        this.licenciasVendidas = 0;
     }
 
     public String getNombre() {
@@ -42,41 +42,52 @@ public class Juego {
     }
 
     public void setNombre(String nombre) {
-        if(nombre != null && !nombre.trim().isEmpty())
-            this.nombre = nombre;
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            this.nombre = nombre.trim();
+        }
     }
 
     public void setCategoria(String categoria) {
-        if(categoria != null && !categoria.trim().isEmpty())
-            this.categoria = categoria;
+        if (categoria != null && !categoria.trim().isEmpty()) {
+            this.categoria = categoria.trim();
+        }
     }
 
     public void setTamanio(int tamanio) {
-        if(tamanio > 0)
+        if (tamanio > 0) {
             this.tamanio = tamanio;
+        }
     }
 
     public void setPrecio(double precio) {
-        if(precio > 0)
+        if (Double.isFinite(precio) && precio > 0) {
             this.precio = precio;
+        }
     }
 
-    public boolean comprar(int cantidad){
-        if(cantidad > 0){
+    public void setLicenciasDisponibles(int licenciasDisponibles) {
+        if (licenciasDisponibles >= 0) {
+            this.licenciasDisponibles = licenciasDisponibles;
+        }
+    }
+
+    public boolean comprar(int cantidad) {
+        if (cantidad > 0 && cantidad <= Integer.MAX_VALUE - licenciasDisponibles) {
             licenciasDisponibles += cantidad;
             return true;
         }
         return false;
     }
-    public boolean vender(int cantidad){
-        if(cantidad > 0 && cantidad <= licenciasDisponibles){
+
+    public boolean vender(int cantidad) {
+        if (cantidad > 0 && cantidad <= licenciasDisponibles
+                && cantidad <= Integer.MAX_VALUE - licenciasVendidas) {
             licenciasDisponibles -= cantidad;
             licenciasVendidas += cantidad;
             return true;
         }
         return false;
     }
-
 
     @Override
     public String toString() {
