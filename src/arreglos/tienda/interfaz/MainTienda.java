@@ -30,7 +30,7 @@ public class MainTienda {
 
                 }break;
                 case 5:{
-
+                    vender();
                 }break;
                 case 6:{
 
@@ -87,4 +87,17 @@ public class MainTienda {
     }
 
          */
+    public static void vender(){
+        String nombre = Validacion.leerString("Ingrese el nombre del juego");
+        System.out.print("Ingrese la cantidad: ");
+        int cantidad = Integer.parseInt(sc.nextLine());
+
+        double pago = tienda.vender(nombre,cantidad);
+        if(pago > 0){
+            JOptionPane.showMessageDialog(null,"Juego: "+nombre+"\nCantidad: "+cantidad+
+                    "\nValor a cancelar: "+pago);
+        }else{
+            JOptionPane.showMessageDialog(null,"No ha sido posible vender el juego "+nombre);
+        }
+    }
 }
