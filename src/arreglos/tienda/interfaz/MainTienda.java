@@ -54,7 +54,17 @@ public class MainTienda {
     }
 
     public static void ingresarJuegos(){
-
+        System.out.println("*******Ingreso de datos********");
+        System.out.print("Ingrese el nombre: ");
+        String nombre = Validacion.leerString("Ingresa el nombre");
+        System.out.print("Ingrese la categoria: ");
+        String categoria = Validacion.leerString("Ingresa la categoria");
+        System.out.print("Ingrese el tamanio: ");
+        int tamanio = Integer.parseInt(sc.nextLine());
+        System.out.print("Ingrese el precio: ");
+        double precio = Double.parseDouble(sc.nextLine());
+        System.out.print("Ingrese el stock inicial: ");
+        int licenciasDisponibles = Integer.parseInt(sc.nextLine());
     }
 
 }
