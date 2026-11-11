@@ -1,6 +1,6 @@
 package arreglos.tienda.interfaz;
 
-import arreglos.tienda.modelo.AppStore;
+import arreglos.tienda.modelo.*;
 import utilitario.Validacion;
 
 import java.util.Scanner;
@@ -11,15 +11,16 @@ public class MainTienda {
 
     static void main() {
         int opc;
+        tienda.cargarDatos();
         do{
             menu();
             opc = Integer.parseInt(sc.nextLine());
             switch (opc){
                 case 1:{
-
+                    ingresarJuegos();
                 }break;
                 case 2:{
-
+                    System.out.println(tienda.sacarJuegos());
                 }break;
                 case 3:{
 
@@ -66,5 +67,18 @@ public class MainTienda {
         System.out.print("Ingrese el stock inicial: ");
         int licenciasDisponibles = Integer.parseInt(sc.nextLine());
     }
+    /*  public static void mostrarJuegos(){
 
+        codigo si mi clase appstore no tiene el metodo para mostrar todos los juegos
+        Juego juegos[] = tienda.getJuegos();
+        if (tienda.getIndice() != -1) {
+            for (int i = 0; i <= tienda.getIndice(); i++) {
+                System.out.println(juegos[i]);
+            }
+        }else{
+            System.out.println("No hay juegos para mostrar");
+        }
+    }
+
+         */
 }
