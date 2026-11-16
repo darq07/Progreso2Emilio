@@ -99,22 +99,28 @@ public class MainTienda {
     public static void comprar(){
         String nombre = Validacion.leerString("Ingrese el nombre del juego");
         int cantidad = Validacion.leerEntero("Ingrese la cantidad");
-        if(tienda.comprar(nombre,cantidad)){
-            JOptionPane.showMessageDialog(null,"Se agregaron " + cantidad + " licencias del juego " + nombre);
+
+        if(tienda.comprar(nombre, cantidad)){
+            System.out.println("Compra realizada correctamente");
+            System.out.println("Juego: " + nombre);
+            System.out.println("Cantidad comprada: " + cantidad);
         }else{
-            JOptionPane.showMessageDialog(null,"No ha sido posible comprar el juego " + nombre);
+            System.out.println("No se pudo comprar el juego");
         }
     }
     public static void vender(){
         String nombre = Validacion.leerString("Ingrese el nombre del juego");
         int cantidad = Validacion.leerEntero("Ingrese la cantidad");
 
-        double pago = tienda.vender(nombre,cantidad);
+        double pago = tienda.vender(nombre, cantidad);
+
         if(pago > 0){
-            JOptionPane.showMessageDialog(null,"Juego: "+nombre+"\nCantidad: "+cantidad+
-                    "\nValor a cancelar: "+pago);
+            System.out.println("Venta realizada correctamente");
+            System.out.println("Juego: " + nombre);
+            System.out.println("Cantidad vendida: " + cantidad);
+            System.out.println("Valor a cancelar: $" + pago);
         }else{
-            JOptionPane.showMessageDialog(null,"No ha sido posible vender el juego "+nombre);
+            System.out.println("No ha sido posible vender el juego " + nombre);
         }
     }
 }
