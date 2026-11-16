@@ -15,7 +15,7 @@ public class MainTienda {
         tienda.cargarDatos();
         do{
             menu();
-            opc = Integer.parseInt(sc.nextLine());
+            opc = Validacion.leerOpcion("");
             switch (opc){
                 case 1:{
                     ingresarJuegos();
@@ -24,16 +24,21 @@ public class MainTienda {
                     System.out.println(tienda.sacarJuegos());
                 }break;
                 case 3:{
-
+                    buscar();
                 }break;
                 case 4:{
-
+                    comprar();
                 }break;
                 case 5:{
                     vender();
                 }break;
                 case 6:{
-
+                    String nombre = tienda.juegoMasVendido();
+                    if(!nombre.isEmpty()){
+                        System.out.println("Juego mas vendido: " + nombre);
+                    }else{
+                        System.out.println("No hay juegos para mostrar");
+                    }
                 }break;
                 case 7:{
                     System.out.println("Gracias por usar nuestros servicios");
@@ -57,16 +62,11 @@ public class MainTienda {
 
     public static void ingresarJuegos(){
         System.out.println("*******Ingreso de datos********");
-        System.out.print("Ingrese el nombre: ");
-        String nombre = Validacion.leerString("Ingresa el nombre");
-        System.out.print("Ingrese la categoria: ");
-        String categoria = Validacion.leerString("Ingresa la categoria");
-        System.out.print("Ingrese el tamanio: ");
-        int tamanio = Integer.parseInt(sc.nextLine());
-        System.out.print("Ingrese el precio: ");
-        double precio = Double.parseDouble(sc.nextLine());
-        System.out.print("Ingrese el stock inicial: ");
-        int licenciasDisponibles = Integer.parseInt(sc.nextLine());
+        String nombre = Validacion.leerString("Ingrese el nombre");
+        String categoria = Validacion.leerString("Ingrese la categoria");
+        int tamanio = Validacion.leerEntero("Ingrese el tamanio");
+        double precio = Validacion.leerDouble("Ingrese el precio");
+        int licenciasDisponibles = Validacion.leerEntero("Ingrese el stock inicial");
         if (tienda.agregarJuego(new Juego(nombre,categoria,tamanio,precio,licenciasDisponibles))){
             JOptionPane.showMessageDialog(null, "El juego se ha agregado correctamente");
         }else{
@@ -87,10 +87,27 @@ public class MainTienda {
     }
 
          */
+    public static void buscar(){
+        String nombre = Validacion.leerString("Ingrese el nombre del juego");
+        Juego j1 = tienda.buscarJuego(nombre);
+        if(j1 != null){
+            System.out.println(j1);
+        }else{
+            System.out.println("No se encontro el juego " + nombre);
+        }
+    }
+    public static void comprar(){
+        String nombre = Validacion.leerString("Ingrese el nombre del juego");
+        int cantidad = Validacion.leerEntero("Ingrese la cantidad");
+        if(tienda.comprar(nombre,cantidad)){
+            JOptionPane.showMessageDialog(null,"Se agregaron " + cantidad + " licencias del juego " + nombre);
+        }else{
+            JOptionPane.showMessageDialog(null,"No ha sido posible comprar el juego " + nombre);
+        }
+    }
     public static void vender(){
         String nombre = Validacion.leerString("Ingrese el nombre del juego");
-        System.out.print("Ingrese la cantidad: ");
-        int cantidad = Integer.parseInt(sc.nextLine());
+        int cantidad = Validacion.leerEntero("Ingrese la cantidad");
 
         double pago = tienda.vender(nombre,cantidad);
         if(pago > 0){
