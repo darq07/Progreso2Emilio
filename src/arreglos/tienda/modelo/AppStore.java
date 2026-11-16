@@ -25,14 +25,20 @@ public class AppStore {
 
     public boolean agregarJuego(Juego j){ //en vez del set()
         if(j != null && indice < MAX -1){
-            juegos[++indice] = j;
-            return true;
+            if(j.getNombre() != null && !j.getNombre().trim().isEmpty() &&
+                    j.getCategoria() != null && !j.getCategoria().trim().isEmpty() &&
+                    j.getTamanio() > 0 && j.getPrecio() > 0 &&
+                    Double.isFinite(j.getPrecio()) && j.getLicenciasDisponibles() >= 0 &&
+                    buscarJuego(j.getNombre()) == null){
+                juegos[++indice] = j;
+                return true;
+            }
         }
         return false;
     }
     public Juego buscarJuego(String nombre){
         if(nombre != null && !nombre.trim().isEmpty()){
-            for(int i = 0; i < indice; i++){
+            for(int i = 0; i <= indice; i++){
                 if(juegos[i].getNombre().equalsIgnoreCase(nombre)){
                     return juegos[i];
                 }
