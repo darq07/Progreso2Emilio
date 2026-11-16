@@ -9,11 +9,13 @@ public class Juego {
     private int licenciasVendidas;
 
     public Juego(String nombre, String categoria, int tamanio, double precio, int licenciasDisponibles) {
-        this.nombre = nombre;
-        this.categoria = categoria;
-        this.tamanio = tamanio;
-        this.precio = precio;
-        this.licenciasDisponibles = licenciasDisponibles;
+        setNombre(nombre);
+        setCategoria(categoria);
+        setTamanio(tamanio);
+        setPrecio(precio);
+        if(licenciasDisponibles >= 0){
+            this.licenciasDisponibles = licenciasDisponibles;
+        }
         licenciasVendidas = 0;
     }
 
@@ -57,19 +59,20 @@ public class Juego {
     }
 
     public void setPrecio(double precio) {
-        if(precio > 0)
+        if(Double.isFinite(precio) && precio > 0)
             this.precio = precio;
     }
 
     public boolean comprar(int cantidad){
-        if(cantidad > 0){
+        if(cantidad > 0 && licenciasDisponibles <= Integer.MAX_VALUE - cantidad){
             licenciasDisponibles += cantidad;
             return true;
         }
         return false;
     }
     public boolean vender(int cantidad){
-        if(cantidad > 0 && cantidad <= licenciasDisponibles){
+        if(cantidad > 0 && cantidad <= licenciasDisponibles &&
+                licenciasVendidas <= Integer.MAX_VALUE - cantidad){
             licenciasDisponibles -= cantidad;
             licenciasVendidas += cantidad;
             return true;
